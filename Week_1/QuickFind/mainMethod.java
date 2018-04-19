@@ -1,9 +1,7 @@
 import yiqi.QuickFindUF;
 
-public class mainMethod
-{
-  public static void main(String[] args)
-  {
+public class mainMethod {
+  public static void main(String[] args) {
     int N = Integer.parseInt(args[0]);
     QuickFindUF client = new QuickFindUF(N);
     client.union(0, 10);

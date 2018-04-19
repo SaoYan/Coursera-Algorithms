@@ -1,9 +1,7 @@
 import yiqi.QuickUnionUF;
 
-public class mainMethod
-{
-  public static void main(String[] args)
-  {
+public class mainMethod {
+  public static void main(String[] args) {
     int N = Integer.parseInt(args[0]);
     QuickUnionUF client = new QuickUnionUF(N);
     client.union(0, 10);

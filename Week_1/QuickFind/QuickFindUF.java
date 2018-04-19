@@ -1,25 +1,22 @@
 package yiqi;
 
-public class QuickFindUF
-{
+public class QuickFindUF {
   private int[] id;
 
   // initialization
-  public QuickFindUF(int N)
-  {
+  public QuickFindUF(int N) {
     id = new int[N];
     for (int i = 0; i < N; i++)
       id[i] = i;
   }
 
   // quick find
-  public boolean isConnected(int p, int q)
-  {
+  public boolean isConnected(int p, int q) {
     boolean flag;
-    try{
+    try {
       flag = (id[q] == id[p]);
     }
-    catch (ArrayIndexOutOfBoundsException e){
+    catch (ArrayIndexOutOfBoundsException e) {
       String error = String.format("index should be from 0 to %d\n", id.length-1);
       throw new RuntimeException(error);
     }
@@ -27,19 +24,17 @@ public class QuickFindUF
   }
 
   // union command
-  public void union(int p, int q)
-  {
+  public void union(int p, int q) {
     int pid, qid;
-    try{
+    try {
       pid = id[p];
       qid = id[q];
     }
-    catch (ArrayIndexOutOfBoundsException e){
+    catch (ArrayIndexOutOfBoundsException e) {
       String error = String.format("index should be from 0 to %d\n", id.length-1);
       throw new RuntimeException(error);
     }
-    for (int i =0; i < id.length; i++)
-    {
+    for (int i =0; i < id.length; i++) {
       if (id[i] == pid)
         id[i] = qid;
     }

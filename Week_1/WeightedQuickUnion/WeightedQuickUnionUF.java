@@ -1,11 +1,12 @@
 package yiqi;
 
-public class WeihghtedQuickUnionUF {
+public class WeightedQuickUnionUF {
   private int[] id;
   private int[] size;
 
-  public QuickUnionUF(int N) {
+  public WeightedQuickUnionUF(int N) {
     id = new int[N];
+    size = new int[N];
     for (int i =0; i < N; i++) {
       id[i] = i;
       size[i] = 1;

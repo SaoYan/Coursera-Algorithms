@@ -1,9 +1,7 @@
 # Coursera-Algorithms
 
-Materials of the Coursera course Algorithms  
-**for personal use**
+**FOR PERSONAL USE**
 
-## Codes
+Materials of the [Coursera course Algorithms](https://www.coursera.org/learn/algorithms-part1)
 
-## Notes
-[Github Wiki page](https://github.com/SaoYan/Coursera-Algorithms/wiki)
+Notes on the [Github Wiki page](https://github.com/SaoYan/Coursera-Algorithms/wiki)

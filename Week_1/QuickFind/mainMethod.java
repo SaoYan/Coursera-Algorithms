@@ -1,3 +1,20 @@
+/*----------------------------------------------------------------
+ *  Author:        Yiqi Yan
+ *  Written:       4/12/2018
+ *  Last updated:  4/23/2018
+ *
+ *  Compilation:   javac -d . QuickFindUF.java mainMethod.java
+ *  Execution:     java mainMethod N
+ *
+ *  Invoke Quick-Find algorithm
+ *
+ *  % java mainMethod 100
+ *  true
+ *  true
+ *  false
+ *
+ *----------------------------------------------------------------*/
+
 import yiqi.QuickFindUF;
 
 public class mainMethod {

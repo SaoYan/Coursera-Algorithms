@@ -1,7 +1,23 @@
+/*----------------------------------------------------------------
+ *  Author:        Yiqi Yan
+ *  Written:       4/3/1997
+ *  Last updated:  4/23/2018
+ *
+ *  Compilation:   javac -d . QuickFindUF.java
+ *  Execution:     java yiqi.QuickFindUF
+ *
+ *  Implement Quick Find algorithm
+ *
+ *  % java yiqi.QuickFindUF
+ *  true
+ *  false
+ *
+ *----------------------------------------------------------------*/
+
 package yiqi;
 
 public class QuickFindUF {
-  private int[] id;
+  private int[] id; // id[i] is parent of i
 
   // initialization
   public QuickFindUF(int N) {
@@ -10,33 +26,37 @@ public class QuickFindUF {
       id[i] = i;
   }
 
+  // validate
+  private void validate(int k) {
+    if (k < 0 || k >= id.length) {
+      throw new IllegalArgumentException("index is out of range! expected: between 0 and " + (id.length-1) + " got: " + k);
+    }
+  }
+
   // quick find
   public boolean isConnected(int p, int q) {
-    boolean flag;
-    try {
-      flag = (id[q] == id[p]);
-    }
-    catch (ArrayIndexOutOfBoundsException e) {
-      String error = String.format("index should be from 0 to %d\n", id.length-1);
-      throw new RuntimeException(error);
-    }
-    return flag;
+    validate(p);
+    validate(q);
+    return id[q] == id[p];
   }
 
   // union command
   public void union(int p, int q) {
-    int pid, qid;
-    try {
-      pid = id[p];
-      qid = id[q];
-    }
-    catch (ArrayIndexOutOfBoundsException e) {
-      String error = String.format("index should be from 0 to %d\n", id.length-1);
-      throw new RuntimeException(error);
-    }
+    validate(p);
+    validate(q);
+    int pid = id[p];
+    int qid = id[q];
     for (int i =0; i < id.length; i++) {
       if (id[i] == pid)
         id[i] = qid;
     }
+  }
+
+  public static void main(String[] args) {
+    QuickFindUF client = new QuickFindUF(100);
+    client.union(0, 10);
+    client.union(10, 20);
+    System.out.println(client.isConnected(0, 20));
+    System.out.println(client.isConnected(0, 30));
   }
 }

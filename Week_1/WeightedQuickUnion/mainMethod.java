@@ -1,3 +1,20 @@
+/*----------------------------------------------------------------
+ *  Author:        Yiqi Yan
+ *  Written:       4/12/2018
+ *  Last updated:  4/23/2018
+ *
+ *  Compilation:   javac -d . WeightedQuickUnionUF.java mainMethod.java
+ *  Execution:     java mainMethod N
+ *
+ *  Invoke Weighted Quick Union algorithm (without path compression)
+ *
+ *  % java mainMethod 100
+ *  true
+ *  true
+ *  false
+ *
+ *----------------------------------------------------------------*/
+
 import yiqi.WeightedQuickUnionUF;
 
 public class mainMethod {

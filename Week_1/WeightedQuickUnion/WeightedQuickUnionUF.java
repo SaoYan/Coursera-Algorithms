@@ -50,6 +50,7 @@ public class WeightedQuickUnionUF {
   public void union(int p, int q) {
     int rootp = findRoot(p);
     int rootq = findRoot(q);
+    if (rootp == rootq) return;
     if (size[rootp] < size[rootq]) {
       id[rootp] = id[rootq];
       size[rootq] += size[rootp];

@@ -6,4 +6,4 @@ Materials of the [Coursera course *Algorithms*](https://www.coursera.org/learn/a
 
 Notes are on the [Github Wiki page](https://github.com/SaoYan/Coursera-Algorithms/wiki)  
 
-Forget it! Programming assignments are not here :D
+Forget about it! Codes of programming assignments are not here :D

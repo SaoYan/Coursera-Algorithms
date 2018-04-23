@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------
  *  Author:        Yiqi Yan
- *  Written:       4/3/1997
+ *  Written:       4/3/2018
  *  Last updated:  4/23/2018
  *
  *  Compilation:   javac -d . WeightedQuickUnionUF.java

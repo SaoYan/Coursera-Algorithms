@@ -6,10 +6,18 @@
  *  Compilation:   javac StackOfStringsLinkedList.java
  *  Execution:     java StackOfStringsLinkedList < test.txt
  *
+ *  Stack of strings - linked-list implementation
  *  % java StackOfStringsLinkedList < test.txt
+ *  to
+ *  be
+ *  not
+ *  that
+ *  or
+ *  be
  *
- *
- *
+ *  Display all the strings in the stack:
+ *  is
+ *  to
  *
  *----------------------------------------------------------------*/
 
@@ -23,6 +31,10 @@ public class StackOfStringsLinkedList {
   }
 
   private Node first = null;
+
+  public boolean isEmpty() {
+    return first == null;
+  }
 
   public void push(String item) {
     Node oldFirst = first;

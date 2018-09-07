@@ -21,11 +21,12 @@
  *  to
  *
  *----------------------------------------------------------------*/
+import java.util.Iterator;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class GenericStackLinkedList<T> {
+public class GenericStackLinkedList<T> implements Iterable<T> {
   private class Node {
     private T item;
     private Node next;
@@ -50,6 +51,22 @@ public class GenericStackLinkedList<T> {
     return item;
   }
 
+  public Iterator<T> iterator() {
+    return new ListIterator();
+  }
+
+  private class ListIterator implements Iterator<T> {
+    private Node current = first;
+    public boolean hasNext() { return current != null;}
+    public void remove() { throw new UnsupportedOperationException(); }
+    public T next() {
+      T item = current.item;
+      current = current.next;
+      return item;
+    }
+  }
+
+  /*
   public void display() {
     System.out.println("\nDisplay all the strings in the stack:");
     Node node = first;
@@ -58,6 +75,7 @@ public class GenericStackLinkedList<T> {
       node = node.next;
     }
   }
+  */
 
   public static void main(String[] args) {
     GenericStackLinkedList<String> stack = new GenericStackLinkedList<String>();
@@ -68,6 +86,9 @@ public class GenericStackLinkedList<T> {
       else              stack.push(s);
     }
 
-    stack.display();
+    // stack.display();
+    System.out.println("\nDisplay all the strings in the stack:");
+    for (String s: stack)
+      System.out.println(s);
   }
 }

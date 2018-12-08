@@ -3,17 +3,37 @@
  *  Written:       12/07/2018
  *  Last updated:  12/07/2018
  *
- *  Compilation:
- *  Execution:
+ *  Compilation: javac Deque.java
+ *  Execution: java Deque
  *
+ *  Deque: linked-list implementation
  *
- *  % java
+ *  % java Deque
  *
+ *  4
+ *  2
+ *  1
+ *  3
+ *
+ *  4
+
+ *  2
+ *  1
+ *  3
+
+ *  3
+
+ *  2
+ *  1
+ *
+ *  2
+ *  1
  *----------------------------------------------------------------*/
 
  import edu.princeton.cs.algs4.StdIn;
  import edu.princeton.cs.algs4.StdOut;
  import java.util.Iterator;
+ import java.util.NoSuchElementException;
 
  public class Deque<Item> implements Iterable<Item> {
    private class Node {
@@ -44,6 +64,7 @@
 
    // add the item to the front
    public void addFirst(Item item) {
+     if (item == null) throw new IllegalArgumentException("Cannot add null item!");
      if (isEmpty()) {
        first = new Node();
        last = first;
@@ -66,6 +87,7 @@
 
    // add the item to the end
    public void addLast(Item item) {
+     if (item == null) throw new IllegalArgumentException("Cannot add null item!");
      if (isEmpty()) {
        first = new Node();
        last = first;
@@ -88,7 +110,7 @@
 
    // remove and return the item from the front
    public Item removeFirst() {
-     if (isEmpty()) throw new IllegalStateException("Unable to remove items from empty deque!";)
+     if (isEmpty()) throw new NoSuchElementException("Unable to remove items from empty deque!");
      Item item = first.item;
      Node oldFirst = first;
      first = oldFirst.next;
@@ -100,7 +122,7 @@
 
    // remove and return the item from the end
    public Item removeLast() {
-     if (isEmpty()) throw new IllegalStateException("Unable to remove items from empty deque!";)
+     if (isEmpty()) throw new NoSuchElementException("Unable to remove items from empty deque!");
      Item item = last.item;
      Node oldLast = last;
      last = oldLast.previous;
@@ -111,12 +133,12 @@
    }
 
    // return an iterator over items in order from front to end
-   public Iterator<Item> iterator() { return DequeIterator; }
+   public Iterator<Item> iterator() { return new DequeIterator(); }
 
    private class DequeIterator implements Iterator<Item> {
      private Node current = first;
 
-     public boolean hasNext() { return  first != null;}
+     public boolean hasNext() { return  current != null;}
 
      public void remove() { throw new UnsupportedOperationException("This operation is not supported!"); }
 
@@ -127,10 +149,47 @@
      }
    }
 
+   public void displayAll(boolean reverse) {
+     StdOut.println('\n');
+     if (reverse) {
+       Node node = last;
+       while (node != null) {
+         StdOut.println(node.item);
+         node = node.previous;
+       }
+     }
+     else {
+       Node node = first;
+       while (node != null) {
+         StdOut.println(node.item);
+         node = node.next;
+       }
+     }
+     StdOut.println('\n');
+   }
+
    // unit testing
    public static void main(String[] args) {
-    Deque<Integer> deque = new Deque();
-    int first = deque.removeFirst();
-    int last = deque.removeLast();
+    Deque<Integer> deque = new Deque<Integer>();
+
+    deque.addFirst(1);
+    deque.addFirst(2);
+    deque.addLast(3);
+    deque.addFirst(4);
+    deque.displayAll(false);
+
+    int removed;
+
+    removed = deque.removeFirst();
+    StdOut.println(removed);
+    deque.displayAll(false);
+
+    removed = deque.removeLast();
+    StdOut.println(removed);
+    deque.displayAll(false);
+
+    for (int a : deque) {
+      StdOut.println(a);
+    }
    }
  }

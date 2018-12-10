@@ -9,48 +9,39 @@
  *  Deque: linked-list implementation
  *
  *  % java Deque
+ *  true
+ *  0
+ *
+ *  4123
+ *  4
  *
  *  4
- *  2
- *  1
  *  3
- *
- *  4
-
+ *  12
  *  2
- *  1
- *  3
+----------------------------------------------------------------*/
 
- *  3
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
- *  2
- *  1
- *
- *  2
- *  1
- *----------------------------------------------------------------*/
+public class Deque<Item> implements Iterable<Item> {
+  private class Node {
+    private Item item;
+    private Node next;
+    private Node previous;
+  }
 
- import edu.princeton.cs.algs4.StdIn;
- import edu.princeton.cs.algs4.StdOut;
- import java.util.Iterator;
- import java.util.NoSuchElementException;
+  private Node first, last;
+  private int size;
 
- public class Deque<Item> implements Iterable<Item> {
-   private class Node {
-     private Item item;
-     private Node next;
-     private Node previous;
-   }
-
-   private Node first, last;
-   private int size;
-
-   // construct an empty deque
-   public Deque() {
-     first = null;
-     last = null;
-     size = 0;
-   }
+  // construct an empty deque
+  public Deque() {
+    first = null;
+    last = null;
+    size = 0;
+  }
 
    // is the deque empty?
    public boolean isEmpty() {
@@ -67,12 +58,10 @@
      if (item == null) throw new IllegalArgumentException("Cannot add null item!");
      if (isEmpty()) {
        first = new Node();
-       last = first;
        first.item = item;
        first.next = null;
        first.previous = null;
-       last.next = null;
-       last.previous = null;
+       last = first;
      }
      else {
        Node newFirst = new Node();
@@ -89,13 +78,11 @@
    public void addLast(Item item) {
      if (item == null) throw new IllegalArgumentException("Cannot add null item!");
      if (isEmpty()) {
-       first = new Node();
-       last = first;
-       first.item = item;
-       first.next = null;
-       first.previous = null;
+       last = new Node();
+       last.item = item;
        last.next = null;
        last.previous = null;
+       first = last;
      }
      else {
        Node newLast = new Node();
@@ -113,9 +100,15 @@
      if (isEmpty()) throw new NoSuchElementException("Unable to remove items from empty deque!");
      Item item = first.item;
      Node oldFirst = first;
-     first = oldFirst.next;
-     first.previous = null;
-     oldFirst.next = null;
+     try {
+       first = oldFirst.next;
+       first.previous = null;
+       oldFirst.next = null;
+     }
+     catch(NullPointerException e) {
+       first = null;
+       last = null;
+     }
      size --;
      return item;
    }
@@ -125,9 +118,15 @@
      if (isEmpty()) throw new NoSuchElementException("Unable to remove items from empty deque!");
      Item item = last.item;
      Node oldLast = last;
-     last = oldLast.previous;
-     last.next = null;
-     oldLast.previous = null;
+     try {
+       last = oldLast.previous;
+       last.next = null;
+       oldLast.previous = null;
+     }
+     catch(NullPointerException e) {
+       first = null;
+       last = null;
+     }
      size --;
      return item;
    }
@@ -149,47 +148,35 @@
      }
    }
 
-   public void displayAll(boolean reverse) {
-     StdOut.println('\n');
-     if (reverse) {
-       Node node = last;
-       while (node != null) {
-         StdOut.println(node.item);
-         node = node.previous;
-       }
-     }
-     else {
-       Node node = first;
-       while (node != null) {
-         StdOut.println(node.item);
-         node = node.next;
-       }
-     }
-     StdOut.println('\n');
-   }
-
    // unit testing
    public static void main(String[] args) {
     Deque<Integer> deque = new Deque<Integer>();
+    int removed;
 
+    // empty -> non-empty -> empty
+    deque.addLast(1);
+    removed = deque.removeFirst();
+    StdOut.println(deque.isEmpty());
+    StdOut.println(deque.size());
+    StdOut.print('\n');
+
+    // add
     deque.addFirst(1);
-    deque.addFirst(2);
+    deque.addLast(2);
     deque.addLast(3);
     deque.addFirst(4);
-    deque.displayAll(false);
-
-    int removed;
+    for (int a : deque) StdOut.print(a);
+    StdOut.print('\n');
+    StdOut.println(deque.size());
+    StdOut.print('\n');
 
     removed = deque.removeFirst();
     StdOut.println(removed);
-    deque.displayAll(false);
-
     removed = deque.removeLast();
     StdOut.println(removed);
-    deque.displayAll(false);
-
-    for (int a : deque) {
-      StdOut.println(a);
-    }
+    for (int a : deque) StdOut.print(a);
+    StdOut.print('\n');
+    StdOut.println(deque.size());
+    StdOut.print('\n');
    }
- }
+}

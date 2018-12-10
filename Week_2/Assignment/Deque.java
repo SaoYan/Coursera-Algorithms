@@ -170,6 +170,7 @@ public class Deque<Item> implements Iterable<Item> {
     StdOut.println(deque.size());
     StdOut.print('\n');
 
+    // remove
     removed = deque.removeFirst();
     StdOut.println(removed);
     removed = deque.removeLast();

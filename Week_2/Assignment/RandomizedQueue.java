@@ -32,6 +32,7 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 import java.util.Iterator;
 import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
   private Item[] a;
@@ -58,12 +59,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
   // add the item
   public void enqueue(Item item) {
+    if (item == null) throw new IllegalArgumentException("Cannot add null item!");
     if (N == a.length) resize(2 * a.length);
     a[N++] = item;
   }
 
   // remove and return a random item
   public Item dequeue() {
+    if (isEmpty()) throw new NoSuchElementException("Unable to dequeue from empty deque!");
     int idx = StdRandom.uniform(0, N);
     Item item = a[idx];
     for (int i = idx + 1; i < N; i ++) a[i-1] = a[i];
@@ -74,6 +77,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
   // return a random item (but do not remove it)
   public Item sample() {
+    if (isEmpty()) throw new NoSuchElementException("Unable to sample from empty deque!");
     int idx = StdRandom.uniform(0, N);
     return a[idx];
   }

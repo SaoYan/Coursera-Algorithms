@@ -34,15 +34,16 @@ public class Permutation {
      }
      */
 
-     for (int i = 0; !StdIn.isEmpty(); i++) {
-       String s = StdIn.readString();
-       if (i < k) randomizedQueue.enqueue(s);
-       else if (StdRandom.uniform() < 0.5) {
-         randomizedQueue.dequeue();
-         randomizedQueue.enqueue(s);
+     if (k > 0) {
+       for (int i = 0; !StdIn.isEmpty(); i++) {
+         String s = StdIn.readString();
+         if (i < k) randomizedQueue.enqueue(s);
+         else if (StdRandom.uniform() < 0.5) {
+           randomizedQueue.dequeue();
+           randomizedQueue.enqueue(s);
+         }
        }
      }
-
      for (String item : randomizedQueue) StdOut.println(item);
    }
 }

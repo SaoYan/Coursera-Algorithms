@@ -35,10 +35,10 @@ public class Permutation {
      */
 
      if (k > 0) {
-       for (int i = 0; !StdIn.isEmpty(); i++) {
+       for (int i = 1; !StdIn.isEmpty(); i++) {
          String s = StdIn.readString();
-         if (i < k) randomizedQueue.enqueue(s);
-         else if (StdRandom.uniform() < 0.5) {
+         if (i <= k) randomizedQueue.enqueue(s);
+         else if (StdRandom.uniform() < (double) k/i) {
            randomizedQueue.dequeue();
            randomizedQueue.enqueue(s);
          }

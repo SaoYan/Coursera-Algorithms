@@ -68,7 +68,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     if (isEmpty()) throw new NoSuchElementException("Unable to dequeue from empty deque!");
     int idx = StdRandom.uniform(0, n);
     Item item = a[idx];
-    for (int i = idx + 1; i < n; i++) a[i-1] = a[i];
+    // for (int i = idx + 1; i < n; i++) a[i-1] = a[i];
+    a[idx] = a[n-1];
+    a[n-1] = null;
     n--;
     if (n > 0 && n == a.length / 4) resize(a.length / 2);
     return item;

@@ -13,12 +13,14 @@
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class Permutation {
    public static void main(String[] args) {
      int k = Integer.parseInt(args[0]);
-
      RandomizedQueue<String> randomizedQueue = new RandomizedQueue<String>();
+
+     /*
      while (!StdIn.isEmpty()) {
        String s = StdIn.readString();
        randomizedQueue.enqueue(s);
@@ -30,5 +32,17 @@ public class Permutation {
        n++;
        StdOut.println(item);
      }
+     */
+
+     for (int i = 0; !StdIn.isEmpty(); i++) {
+       String s = StdIn.readString();
+       if (i < k) randomizedQueue.enqueue(s);
+       else if (StdRandom.uniform() < 0.5) {
+         randomizedQueue.dequeue();
+         randomizedQueue.enqueue(s);
+       }
+     }
+
+     for (String item : randomizedQueue) StdOut.println(item);
    }
 }

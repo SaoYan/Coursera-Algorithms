@@ -3,23 +3,6 @@
  *  Written:       9/11/2018
  *  Last updated:  9/11/2018
  *
- *  Compilation:   javac SortSimpleDemo.java
- *  Execution:     java SortSimpleDemo
- *
- *  Stack - linked-list implementation
- * Using Java generics
- *  % java GenericStackLinkedList < test.txt
- *  to
- *  be
- *  not
- *  that
- *  or
- *  be
- *
- *  Display all the strings in the stack:
- *  is
- *  to
- *
  *----------------------------------------------------------------*/
 import yiqi.Date;
 

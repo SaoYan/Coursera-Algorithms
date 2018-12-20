@@ -12,10 +12,13 @@ public class BruteCollinearPoints {
     if (points == null) throw new IllegalArgumentException("Error: the argument to the constructor is null!");
     for (int i = 0; i < points.length; i++) {
       if (points[i] == null)
-        throw new IllegalArgumentException("Error: null point within the array!");
-        for (int j = i + 1; j < points.length; j++)
+        throw new IllegalArgumentException("Error: null within the input argument!");
+        for (int j = i + 1; j < points.length; j++) {
+          if (points[j] == null)
+            throw new IllegalArgumentException("Error: null within the input argument!");
           if (points[i].compareTo(points[j]) == 0)
             throw new IllegalArgumentException("Array cannot contain same points!");
+        }
     }
     findSegments(points);
   }

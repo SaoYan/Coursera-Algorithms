@@ -86,8 +86,6 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
-        if (that == null)
-          throw new IllegalArgumentException("Argument cannot be null!");
         if (this.y < that.y) return -1;
         if (this.y == that.y && this.x < that.x) return -1;
         if (this.y == that.y && this.x > that.x) return 1;

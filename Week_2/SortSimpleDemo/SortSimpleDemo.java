@@ -4,9 +4,10 @@
  *  Last updated:  9/11/2018
  *
  *----------------------------------------------------------------*/
-import yiqi.Date;
+import java.util.Arrays;
 
 public class SortSimpleDemo {
+  /*
   public static void sort(Comparable[] a) {
     for (int i = 0; i < a.length; i++) {
       int min = i;
@@ -17,6 +18,7 @@ public class SortSimpleDemo {
       exchange(a, i, min);
     }
   }
+  */
 
   public static boolean isSorted(Comparable[] a) {
     for (int i = 1; i < a.length; i++) {
@@ -39,14 +41,15 @@ public class SortSimpleDemo {
   }
 
   public static void main(String[] args) {
-    Date dates[] = {new Date(2018,7,12), new Date(1996,5,31), new Date(1970,10,1), new Date(2018,9,11)};
+    Date[] dates = {new Date(2018,7,12), new Date(1996,5,31), new Date(1970,10,1), new Date(2018,9,11)};
 
     System.out.println("\nOriginal Array:");
     for (int i = 0; i < dates.length; i ++) {
       dates[i].display();
     }
 
-    SortSimpleDemo.sort(dates);
+    // SortSimpleDemo.sort(dates);
+    Arrays.sort(dates);
 
     System.out.println("\nSorted Array:");
     for (int i = 0; i < dates.length; i ++) {

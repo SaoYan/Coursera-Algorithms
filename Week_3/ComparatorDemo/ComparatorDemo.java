@@ -13,49 +13,9 @@
  *----------------------------------------------------------------*/
 
 import java.util.Comparator;
+import java.util.Arrays;
 
 public class ComparatorDemo {
-
-  /*
-  natural order
-  */
-  /*
-  public static boolean isSorted(Comparable[] a) {
-    for (int i = 1; i < a.length; i++) {
-      if (less(a, i, i-1))
-        return false;
-    }
-    return true;
-  }
-
-  public static void sort(Comparable[] a) {
-    // Selection Sort
-    for (int i = 0; i < a.length; i++) {
-      int min = i;
-      for (int j = i+1; j < a.length; j++) {
-        if (less(a, j, min))
-          min = j;
-      }
-      exchange(a, i, min);
-    }
-  }
-
-  private static boolean less(Comparable[] a, int i, int j) {
-    // retun true if a[i] is less than a[j]
-    return (a[i].compareTo(a[j]) < 0);
-  }
-
-  private static void exchange(Comparable[] a, int i, int j) {
-    // exchange the ith and the jth elements in a
-    Comparable temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
-  }
-  */
-
-  /*
-  customer order
-  */
   public static boolean isSorted(Object[] a, Comparator comparator) {
     for (int i = 1; i < a.length; i++) {
       if (less(comparator, a[i], a[i-1]))
@@ -64,6 +24,7 @@ public class ComparatorDemo {
     return true;
   }
 
+  /*
   public static void sort(Object[] a, Comparator comparator) {
     // Selection Sort
     for (int i = 0; i < a.length; i++) {
@@ -75,6 +36,7 @@ public class ComparatorDemo {
       exchange(a, i, min);
     }
   }
+  */
 
   private static boolean less(Comparator c, Object u, Object v) {
     return (c.compare(u,v) < 0);
@@ -87,21 +49,30 @@ public class ComparatorDemo {
   }
 
   public static void main(String[] args) {
-    Date dates[] = {new Date(2018,7,12), new Date(1996,5,31), new Date(1970,10,1), new Date(2018,9,11)};
+    Date[] dates = {new Date(2018,7,12), new Date(1996,5,31), new Date(1970,10,1), new Date(2018,9,11)};
 
     System.out.println("\nOriginal Array:");
     for (int i = 0; i < dates.length; i ++) {
       dates[i].display();
     }
 
-    ComparatorDemo.sort(dates, Date.BY_DAY);
-
-    System.out.println("\nSorted Array:");
+    Arrays.sort(dates); //natural order
+    System.out.println("\nSorted Array - Natural Order:");
     for (int i = 0; i < dates.length; i ++) {
       dates[i].display();
     }
 
-    System.out.println("\nIs the array sorted?");
+    System.out.println("\nIs the array sorted according to customer order?");
+    System.out.println(ComparatorDemo.isSorted(dates, Date.BY_DAY));
+
+    // ComparatorDemo.sort(dates, Date.BY_DAY);
+    Arrays.sort(dates, Date.BY_DAY); //customer order
+    System.out.println("\nSorted Array - Customer Order:");
+    for (int i = 0; i < dates.length; i ++) {
+      dates[i].display();
+    }
+
+    System.out.println("\nIs the array sorted according to customer order?");
     System.out.println(ComparatorDemo.isSorted(dates, Date.BY_DAY));
   }
 }

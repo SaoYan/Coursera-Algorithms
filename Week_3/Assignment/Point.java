@@ -65,9 +65,11 @@ public class Point implements Comparable<Point> {
         if (this.compareTo(that) == 0) return Double.NEGATIVE_INFINITY;
         if (this.x == that.x) return Double.POSITIVE_INFINITY;
         if (this.y == that.y) return 0.;
-        double x_this = (double) this.x; double y_this = (double) this.y;
-        double x_that = (double) that.x; double y_that = (double) that.y;
-        return (y_this - y_that) / (x_this - x_that);
+        double xThis = (double) this.x;
+        double yThis = (double) this.y;
+        double xThat = (double) that.x;
+        double yThat = (double) that.y;
+        return (yThis - yThat) / (xThis - xThat);
     }
 
     /**
@@ -84,9 +86,11 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
+        if (that == null)
+          throw new IllegalArgumentException("Argument cannot be null!");
         if (this.y < that.y) return -1;
-        if (this.y == that.y & this.x < that.x) return -1;
-        if (this.y == that.y & this.x > that.x) return 1;
+        if (this.y == that.y && this.x < that.x) return -1;
+        if (this.y == that.y && this.x > that.x) return 1;
         if (this.y > that.y) return 1;
         return 0;
     }
@@ -127,10 +131,10 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
-        Point p1 = new Point(0,0);
-        Point p2 = new Point(1,2);
-        Point p3 = new Point(2,1);
-        Point p4 = new Point(1,1);
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(1, 2);
+        Point p3 = new Point(2, 1);
+        Point p4 = new Point(1, 1);
 
         // slopeTos()
         StdOut.println(p1.slopeTo(p1));
@@ -145,7 +149,7 @@ public class Point implements Comparable<Point> {
         StdOut.println(p3.compareTo(p4));
         StdOut.println('\n');
 
-        Point[] points = {p2,p3,p4};
+        Point[] points = {p2, p3, p4};
 
         // natural order
         Arrays.sort(points);

@@ -101,13 +101,18 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-        return new SlopeOrder();
+        return new SlopeOrder(this);
     }
 
     private class SlopeOrder implements Comparator<Point> {
+      private Point p0;
+
+      public SlopeOrder(Point invokePoint) {
+        p0 = invokePoint;
+      }
       public int compare(Point p1, Point p2) {
-        if (Point.this.slopeTo(p1) < Point.this.slopeTo(p2)) return -1;
-        if (Point.this.slopeTo(p1) > Point.this.slopeTo(p2)) return 1;
+        if (p0.slopeTo(p1) < p0.slopeTo(p2)) return -1;
+        if (p0.slopeTo(p1) > p0.slopeTo(p2)) return 1;
         return 0;
       }
     }

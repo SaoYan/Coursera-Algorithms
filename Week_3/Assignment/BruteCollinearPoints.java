@@ -36,7 +36,7 @@ public class BruteCollinearPoints {
   }
 
   private boolean isSegment(Point p1, Point p2, Point p3, Point p4) {
-    if (p1.slopeTo(p2) == p1.slopeTo(p3) && p1.slopeTo(p2) == p1.slopeTo(p4))
+    if (p1.slopeOrder().compare(p2, p3) == 0 && p1.slopeOrder().compare(p2, p4) == 0)
       return true;
     return false;
   }

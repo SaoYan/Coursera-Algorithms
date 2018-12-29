@@ -4,14 +4,13 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
 public class Solver {
-  private SearchNode lastNode, lastNodeTwin;
+  private SearchNode lastNode;
 
   private class SearchNode implements Comparable<SearchNode> {
     private final Board board;
     private final int moves;
     private SearchNode predecessor;
     private final int manhattanVal;
-    private final boolean isGoal;
 
     public SearchNode(Board board, int moves) {
       if (board == null)
@@ -20,7 +19,6 @@ public class Solver {
       this.moves = moves;
       this.predecessor = null;
       this.manhattanVal = board.manhattan();
-      this.isGoal = board.isGoal();
     }
 
     public int compareTo(SearchNode that) {
@@ -40,10 +38,10 @@ public class Solver {
     MinPQ<SearchNode> nodePQTwin = new MinPQ<SearchNode>();
     nodePQ.insert(new SearchNode(initial, 0));
     nodePQTwin.insert(new SearchNode(initial.twin(), 0));
-
+    SearchNode lastNodeTwin;
     while (!nodePQ.isEmpty() && !nodePQTwin.isEmpty()) {
       lastNode = nodePQ.delMin();
-      if (lastNode.isGoal) return;
+      if (lastNode.board.isGoal()) return;
       for (Board board : lastNode.board.neighbors()) {
         if (lastNode.predecessor != null)
           if (board.equals(lastNode.predecessor.board))
@@ -54,7 +52,7 @@ public class Solver {
       }
       // twin
       lastNodeTwin = nodePQTwin.delMin();
-      if (lastNodeTwin.isGoal) return;
+      if (lastNodeTwin.board.isGoal()) return;
       for (Board board : lastNodeTwin.board.neighbors()) {
         if (lastNodeTwin.predecessor != null)
           if (board.equals(lastNodeTwin.predecessor.board))
@@ -68,8 +66,7 @@ public class Solver {
 
   // is the initial board solvable?
   public boolean isSolvable() {
-    if (lastNode.isGoal) return true;
-    if (lastNodeTwin.isGoal) return false;
+    if (lastNode.board.isGoal()) return true;
     return false;
   }
 
